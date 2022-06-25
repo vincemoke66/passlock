@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passlock.RegistrationSceneController">
+    <children>
+        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@PassLock.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="288.0" layoutY="171.0" text="Passlock">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Label>
+        <Label layoutX="236.0" layoutY="189.0" text="Welcome to Passlock, an offline, lightweight, and secure password manager">
+            <VBox.margin>
+                <Insets bottom="50.0" />
+            </VBox.margin>
+        </Label>
+        <Label text="Enter your master password" />
+        <HBox alignment="CENTER" maxHeight="30.0" minHeight="30.0" prefHeight="30.0" prefWidth="200.0" spacing="10.0">
+            <children>
+                <StackPane prefHeight="150.0" prefWidth="200.0">
+                    <children>
+                        <TextField fx:id="tfPassword" onInputMethodTextChanged="#tfTextChanged" />
+                        <PasswordField fx:id="pfPassword" onInputMethodTextChanged="#pfTextChanged" />
+                    </children>
+                </StackPane>
+            </children>
+            <VBox.margin>
+                <Insets bottom="10.0" />
+            </VBox.margin>
+        </HBox>
+        <CheckBox fx:id="cbTogglePassword" mnemonicParsing="false" onAction="#togglePassword" text="Show password" />
+        <Label fx:id="lblErrorMsg" layoutX="236.0" layoutY="236.0" text="Too short" visible="false">
+            <VBox.margin>
+                <Insets bottom="10.0" />
+            </VBox.margin>
+        </Label>
+        <Button mnemonicParsing="false" onAction="#register" text="Continue" />
+    </children>
+</VBox>

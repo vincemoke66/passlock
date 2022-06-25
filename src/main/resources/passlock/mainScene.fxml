@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="600.0" prefWidth="435.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passlock.MainSceneController">
+    <children>
+        <MenuBar>
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <HBox alignment="CENTER" maxHeight="30.0" minHeight="30.0" prefHeight="30.0" prefWidth="200.0">
+            <children>
+                <TextField fx:id="tfSearch" promptText="search account sitename or username" HBox.hgrow="ALWAYS">
+                    <HBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                    </HBox.margin></TextField>
+                <Button mnemonicParsing="false" onAction="#search" text="Search">
+                    <HBox.margin>
+                        <Insets right="5.0" />
+                    </HBox.margin></Button>
+                <Button mnemonicParsing="false" onAction="#clear" text="Clear">
+                    <HBox.margin>
+                        <Insets right="5.0" />
+                    </HBox.margin>
+                </Button>
+                <Button layoutX="382.0" layoutY="13.0" mnemonicParsing="false" onAction="#refresh" text="Refresh">
+                    <HBox.margin>
+                        <Insets right="5.0" />
+                    </HBox.margin>
+                </Button>
+            </children>
+        </HBox>
+        <ScrollPane hbarPolicy="NEVER" pannable="true" prefHeight="517.0" prefWidth="378.0" VBox.vgrow="ALWAYS">
+            <content>
+                <VBox fx:id="vboxAccountContainer" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" />
+            </content>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+        </ScrollPane>
+        <Accordion>
+            <panes>
+                <TitledPane animated="false" text="Add new account">
+                    <content>
+                        <VBox alignment="CENTER_LEFT" prefHeight="300.0" prefWidth="450.0">
+                            <children>
+                                <Label text="Sitename" />
+                                <HBox alignment="CENTER_LEFT" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="200.0">
+                                    <children>
+                                        <TextField fx:id="tfSitename" HBox.hgrow="ALWAYS">
+                                            <HBox.margin>
+                                                <Insets left="10.0" />
+                                            </HBox.margin>
+                                        </TextField>
+                                    </children>
+                                    <padding>
+                                        <Insets left="10.0" />
+                                    </padding>
+                                </HBox>
+                                <Label text="Username" />
+                                <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="200.0">
+                                    <children>
+                                        <TextField fx:id="tfUsername" HBox.hgrow="ALWAYS">
+                                            <HBox.margin>
+                                                <Insets left="10.0" />
+                                            </HBox.margin>
+                                        </TextField>
+                                    </children>
+                                    <padding>
+                                        <Insets left="10.0" />
+                                    </padding>
+                                </HBox>
+                                <Label text="Password" />
+                                <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="98.0" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="200.0">
+                                    <children>
+                                        <StackPane maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                            <children>
+                                                <TextField fx:id="tfPassword" />
+                                                <PasswordField fx:id="pfPassword" />
+                                            </children>
+                                            <HBox.margin>
+                                                <Insets left="10.0" />
+                                            </HBox.margin>
+                                        </StackPane>
+                                        <CheckBox fx:id="cbTogglePassword" mnemonicParsing="false" onAction="#togglePassword">
+                                            <HBox.margin>
+                                                <Insets left="10.0" />
+                                            </HBox.margin>
+                                        </CheckBox>
+                                        <Button mnemonicParsing="false" onAction="#generatePassword" text="Generate">
+                                            <HBox.margin>
+                                                <Insets left="10.0" />
+                                            </HBox.margin>
+                                        </Button>
+                                    </children>
+                                    <padding>
+                                        <Insets left="10.0" />
+                                    </padding>
+                                </HBox>
+                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0" VBox.vgrow="ALWAYS">
+                                    <children>
+                                        <Label fx:id="lblErrorMsg" text="Invalid inputs" visible="false" />
+                                        <Button mnemonicParsing="false" onAction="#createAccount" text="Create">
+                                            <VBox.margin>
+                                                <Insets top="20.0" />
+                                            </VBox.margin>
+                                        </Button>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </VBox>
+                    </content>
+                </TitledPane>
+            </panes>
+        </Accordion>
+    </children>
+</VBox>
