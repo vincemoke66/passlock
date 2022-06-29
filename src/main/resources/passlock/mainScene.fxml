@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
@@ -12,127 +13,165 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="600.0" prefWidth="435.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passlock.MainSceneController">
+<VBox alignment="CENTER" onKeyPressed="#focusSearch" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passlock.MainSceneController">
     <children>
-        <MenuBar>
-            <menus>
-                <Menu mnemonicParsing="false" text="File">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Close" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Delete" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
-                    </items>
-                </Menu>
-            </menus>
-        </MenuBar>
-        <HBox alignment="CENTER" maxHeight="30.0" minHeight="30.0" prefHeight="30.0" prefWidth="200.0">
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#exit" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#openAddNewAccAccordion" text="Add Account" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#showAboutScene" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+        <HBox alignment="CENTER" maxHeight="30.0" minHeight="50.0" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #fafafa;">
             <children>
                 <TextField fx:id="tfSearch" promptText="search account sitename or username" HBox.hgrow="ALWAYS">
                     <HBox.margin>
                         <Insets left="5.0" right="5.0" />
                     </HBox.margin></TextField>
-                <Button mnemonicParsing="false" onAction="#search" text="Search">
-                    <HBox.margin>
-                        <Insets right="5.0" />
-                    </HBox.margin></Button>
-                <Button mnemonicParsing="false" onAction="#clear" text="Clear">
+                <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#search" style="-fx-background-color: #61A8E8; -fx-text-fill: #fff;">
                     <HBox.margin>
                         <Insets right="5.0" />
                     </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@search.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+                <Button fx:id="btnClear" mnemonicParsing="false" onAction="#clear" style="-fx-background-color: #4FDDC3;">
+                    <HBox.margin>
+                        <Insets right="5.0" />
+                    </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@clear.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
                 </Button>
-                <Button layoutX="382.0" layoutY="13.0" mnemonicParsing="false" onAction="#refresh" text="Refresh">
+                <Button fx:id="btnRefresh" layoutX="382.0" layoutY="13.0" mnemonicParsing="false" onAction="#refresh" style="-fx-background-color: #FFC562;">
                     <HBox.margin>
                         <Insets right="5.0" />
                     </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@refresh.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
                 </Button>
             </children>
-        </HBox>
-        <ScrollPane hbarPolicy="NEVER" pannable="true" prefHeight="517.0" prefWidth="378.0" VBox.vgrow="ALWAYS">
-            <content>
-                <VBox fx:id="vboxAccountContainer" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" />
-            </content>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
+        </HBox>
+        <ScrollPane fx:id="spAccountsListContainer" hbarPolicy="NEVER" pannable="true" prefHeight="517.0" prefWidth="378.0" VBox.vgrow="ALWAYS">
+            <content>
+                <VBox fx:id="vboxAccountContainer" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" spacing="15.0" />
+            </content>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
         </ScrollPane>
-        <Accordion>
+        <Accordion fx:id="accordionNewAccount" style="-fx-background-color: #fff;">
             <panes>
-                <TitledPane animated="false" text="Add new account">
+                <TitledPane fx:id="tpAddNewAcc" animated="false" style="-fx-background-color: #fff;" text="Add new account">
                     <content>
-                        <VBox alignment="CENTER_LEFT" prefHeight="300.0" prefWidth="450.0">
+                        <VBox alignment="CENTER_LEFT" prefHeight="300.0" prefWidth="450.0" style="-fx-background-color: #fff;">
                             <children>
                                 <Label text="Sitename" />
-                                <HBox alignment="CENTER_LEFT" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="200.0">
-                                    <children>
-                                        <TextField fx:id="tfSitename" HBox.hgrow="ALWAYS">
-                                            <HBox.margin>
-                                                <Insets left="10.0" />
-                                            </HBox.margin>
-                                        </TextField>
-                                    </children>
-                                    <padding>
-                                        <Insets left="10.0" />
-                                    </padding>
-                                </HBox>
+                                  <TextField fx:id="tfSitename">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                                  </TextField>
                                 <Label text="Username" />
-                                <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="200.0">
-                                    <children>
-                                        <TextField fx:id="tfUsername" HBox.hgrow="ALWAYS">
-                                            <HBox.margin>
-                                                <Insets left="10.0" />
-                                            </HBox.margin>
-                                        </TextField>
-                                    </children>
-                                    <padding>
-                                        <Insets left="10.0" />
-                                    </padding>
-                                </HBox>
+                                  <TextField fx:id="tfUsername">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                                  </TextField>
                                 <Label text="Password" />
-                                <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="98.0" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="200.0">
+                                <HBox alignment="CENTER" layoutX="10.0" layoutY="98.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                     <children>
-                                        <StackPane maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                        <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                                             <children>
-                                                <TextField fx:id="tfPassword" />
-                                                <PasswordField fx:id="pfPassword" />
+                                                <TextField fx:id="tfPassword" StackPane.alignment="CENTER" />
+                                                <PasswordField fx:id="pfPassword" StackPane.alignment="CENTER" />
                                             </children>
                                             <HBox.margin>
-                                                <Insets left="10.0" />
+                                                <Insets />
                                             </HBox.margin>
                                         </StackPane>
-                                        <CheckBox fx:id="cbTogglePassword" mnemonicParsing="false" onAction="#togglePassword">
+                                        <CheckBox fx:id="cbTogglePassword" mnemonicParsing="false" onAction="#togglePassword" style="-fx-background-color: #61A8E8; -fx-border-color: #fff;">
                                             <HBox.margin>
-                                                <Insets left="10.0" />
+                                                <Insets left="5.0" right="5.0" />
                                             </HBox.margin>
                                         </CheckBox>
-                                        <Button mnemonicParsing="false" onAction="#generatePassword" text="Generate">
+                                        <Button fx:id="btnGenerate" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#generatePassword" style="-fx-background-color: #4FDDC3;">
                                             <HBox.margin>
-                                                <Insets left="10.0" />
+                                                <Insets />
                                             </HBox.margin>
+                                 <graphic>
+                                    <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@generate.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                                         </Button>
                                     </children>
-                                    <padding>
-                                        <Insets left="10.0" />
-                                    </padding>
                                 </HBox>
-                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0" VBox.vgrow="ALWAYS">
+                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #fff;" VBox.vgrow="ALWAYS">
                                     <children>
-                                        <Label fx:id="lblErrorMsg" text="Invalid inputs" visible="false" />
-                                        <Button mnemonicParsing="false" onAction="#createAccount" text="Create">
-                                            <VBox.margin>
-                                                <Insets top="20.0" />
-                                            </VBox.margin>
+                                        <Label fx:id="lblErrorMsg" text="Invalid inputs" visible="false">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </VBox.margin></Label>
+                                        <Button contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#createAccount" style="-fx-background-color: #61A8E8; -fx-text-fill: #fff;" text="Create" textAlignment="CENTER">
+                                 <graphic>
+                                    <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@create.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                                         </Button>
                                     </children>
                                 </VBox>

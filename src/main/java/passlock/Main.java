@@ -16,12 +16,19 @@ import java.util.List;
 public class Main extends Application {
 
     public static List<Account> accounts = new ArrayList<Account>();
+    public static MasterAccount masterAccount;
+
+    public static FXMLLoader mainLoader;
 
     @Override
     public void start(Stage stage) throws IOException {
+        masterAccount = new MasterAccount();
+
+        mainLoader = new FXMLLoader(getClass().getResource("mainscene.fxml"));
+
         FXMLLoader loader;
 
-        Path masterpassFile = Paths.get("masterpass.data");
+        Path masterpassFile = Paths.get("psslck.data");
 
         if (!Files.exists(masterpassFile)) {
             loader = new FXMLLoader(Main.class.getResource("registrationScene.fxml"));

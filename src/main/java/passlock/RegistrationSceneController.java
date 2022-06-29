@@ -57,17 +57,21 @@ public class RegistrationSceneController {
     }
 
     public void register(ActionEvent actionEvent) throws IOException {
-        if (pfPassword.getText().length() < 8) {
+        password = tfPassword.getText();
+        if (!cbTogglePassword.isSelected())
+            password = pfPassword.getText();
+
+        if (password.length() < 8) {
             lblErrorMsg.setVisible(true);
-            lblErrorMsg.setTextFill(Color.web("#F96868"));
+            System.out.println(cbTogglePassword.isSelected());
             return;
         }
 
-        Master masterAcc = new Master(Encryption.hash(pfPassword.getText()));
+        Main.masterAccount.setHashedPassword(Encryption.hash(pfPassword.getText()));
 
-        try (ObjectOutputStream stream = new ObjectOutputStream(Files.newOutputStream(Paths.get("masterpass.data")))) {
-            stream.writeObject(masterAcc);
-            System.out.println("Master Account Saved!");
+        try (ObjectOutputStream stream = new ObjectOutputStream(Files.newOutputStream(Paths.get("psslck.data")))) {
+            stream.writeObject(Main.masterAccount);
+            System.out.println("Master account creation saved!");
         } catch (IOException e) {
             System.out.println("Failed to save: " + e);
         }

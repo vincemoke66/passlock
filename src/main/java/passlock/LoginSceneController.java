@@ -36,29 +36,26 @@ public class LoginSceneController {
             return;
         }
 
-        Path file = Paths.get("masterpass.data");
-
-        Master masterAcc;
+        Path file = Paths.get("psslck.data");
 
         if (Files.exists(file)) {
             try (ObjectInputStream stream = new ObjectInputStream(Files.newInputStream(file))) {
-                masterAcc = (Master) stream.readObject();
-                System.out.println("Master password loaded!");
+                Main.masterAccount = (MasterAccount) stream.readObject();
+                System.out.println("Master account loaded!");
 
-                if (!Encryption.hash(password).equals(masterAcc.getHasdhedPassword())) {
+                if (!Encryption.hash(password).equals(Main.masterAccount.getHashedPassword())) {
                     lblErrorMsg.setVisible(true);
                     return;
                 }
 
-                FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("mainscene.fxml"));
                 Stage mainStage = new Stage();
 
                 mainStage.setOnCloseRequest(e -> {
                     e.consume();
-                    mainLoader.<MainSceneController>getController().exit();
+                    Main.mainLoader.<MainSceneController>getController().exit();
                 });
 
-                mainStage.setScene(new Scene(mainLoader.load()));
+                mainStage.setScene(new Scene(Main.mainLoader.load()));
                 mainStage.getIcons().add(new Image(getClass().getResourceAsStream("Passlock.png")));
                 mainStage.setTitle("Passlock");
                 mainStage.show();

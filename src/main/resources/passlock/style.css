@@ -1,5 +1,4 @@
 .button-like {
   -fx-background-color: #fefefe;
-  -fx-background-insets: 0 0 -1 0, 0, 1, 2;
-  -fx-background-radius: 5px;
+  -fx-background-radius: 10px;
 }

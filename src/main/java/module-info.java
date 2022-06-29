@@ -1,4 +1,4 @@
-module com.example.passlock {
+module passlock {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.datatransfer;
