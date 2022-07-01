@@ -14,10 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main extends Application {
-
-    public static List<Account> accounts = new ArrayList<Account>();
     public static MasterAccount masterAccount;
-
     public static FXMLLoader mainLoader;
 
     @Override
